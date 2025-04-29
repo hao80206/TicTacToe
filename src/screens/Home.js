@@ -14,13 +14,13 @@ export default function Home ( {navigation, route}) {
    const [lastP, setLastP] = useState(0);
    const { gameId } = route?.params || {};
 
-   const [hint, gameFinished, winCells = []] = getHint(board);
+   const [hint, gameFinished, winCells = []] = getHint(board) || [];
 
    useEffect(() => {
       if(gameId) {
          const game = loadGame(gameId);
          if(game) {
-            const newSteps = game.steps;
+            const newSteps = game.steps || [];
             setSteps(newSteps)
             setLastP(newSteps.length);
             const newBoard = buildBoard(newSteps, newSteps.length);

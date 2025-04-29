@@ -26,9 +26,9 @@ export async function saveGame(steps, result) {
     games.push(newGame);
     await saveData(games);
 }
-export function loadGame(id) {
-    const game = games.find((game) => game.id === id);
-    return game; 
+export async function loadGame(id) {
+    const games = await loadData();
+    return games.find((game) => game.id === id);
 }
 export function getGames() {
     return games;
@@ -37,7 +37,3 @@ export async function deleteGame(id) {
     games = games.filter((game) => game.id !== id);
     await saveData(games);
 }
-async function init() {
-    games = await loadData();
-}
-init();

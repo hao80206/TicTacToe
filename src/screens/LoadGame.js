@@ -4,19 +4,15 @@ import { useState, useEffect} from "react";
 
 import Title from "../components/Title";
 import TButton from "../components/Tbutton";
-import { getGames, deleteGame, init } from "../gameLogic/model";
+import { getGames, deleteGame } from "../gameLogic/model";
 
 export default function LoadGame () {
     const [games, setGames] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-        const fetchGames = async () => {
-            await init(); 
-            const loadedGames = getGames();
-            setGames(loadedGames);
-        };
-        fetchGames();
+        const loadedGames = getGames();
+        setGames(loadedGames);
     },[]);
 
     const renderLabelValue = (label, value) => {
@@ -42,7 +38,7 @@ export default function LoadGame () {
                     {renderLabelValue("Date: ", item.date)}
                     {renderLabelValue("Time: ", item.time)}
                 </View>
-                <View styles = {{flexDirection: "row", justifyContent: "space-around"}}>
+                <View style = {{flexDirection: "row", justifyContent: "space-around"}}>
                     <TButton
                         label="load"
                         width = {70}
